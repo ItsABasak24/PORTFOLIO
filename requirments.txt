@@ -1,4 +1,11 @@
+<<<<<<< HEAD
 Flask
 pymongo
 python-dotenv
 dnspython
+=======
+Flask
+pymongo
+python-dotenv
+dnspython
+>>>>>>> 8ddd6bc01a581abbb04101c9c410c55261509bb6
