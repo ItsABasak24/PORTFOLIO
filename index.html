@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PORTFOLIO</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baskervville+SC&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+</head>
+    <div class="video-background">
+        <video autoplay muted loop playsinline id="bg-video">
+            <source src="{{ url_for('static', filename='videos/Background_video1.mp4') }}" type="video/mp4">
+        </video>
+        <div class="video-overlay"></div>
+    </div>
+<body>
+    <!-- <div class="video-background">
+        <video autoplay muted loop playsinline id="bg-video">
+            <source src="{{ url_for('static', filename='videos/background.mp4') }}" type="video/mp4">
+        </video>
+        <div class="video-overlay"></div>
+    </div> -->
+    <header class="sticky-header">
+    <div class="logo_container">
+        <img src="{{ url_for('static', filename='images/logo3.png') }}" alt="Logo Image" class="logo">
+    </div>
+
+    <div class="nav_bar">
+        <a href="#home">HOME</a>
+        <a href="#about">ABOUT</a>
+        <a href="#projects">PROJECTS</a>
+        <a href="#certification">CERTIFICATION</a>
+        <a href="#contact">CONTACT US</a>
+        <a href="{{ url_for('admin') }}">ADMIN</a>
+    </div>
+
+    <div class="action_bar">
+        <div class="action_container">
+            <a href="https://x.com/ABasak2004"><i class="fa-brands fa-twitter"></i></a>
+        </div>
+        <div class="action_container">
+            <a href="https://www.facebook.com/doli.basak.585/"><i class="fa-brands fa-facebook"></i></a>
+        </div>
+        <div class="action_container">
+            <a href="https://github.com/ItsABasak24"><i class="fa-brands fa-github"></i></a>
+        </div>
+        <div class="action_container">
+            <a href="https://www.linkedin.com/in/arnabbasak24/"><i class="fa-brands fa-linkedin"></i></a>
+        </div>
+    </div>
+</header>
+
+    <main>
+        <section id="home" class="hero">
+        <div class="container">
+            <h1 class="hero-name">Hi I'm ARNAB</h1>
+            <p class="hero-description">
+                Hi! I’m Arnab Basak, an engineering student with a strong passion for web development. I love creating clean, user-friendly websites and building projects that bring ideas to life. I’m constantly learning new technologies and improving my skills to become a better developer every day.
+            </p>
+            <a href="#getintouch" class="hero-button">Get In Touch</a>
+        </div>
+         <!-- 🔥 ADD THIS BLOCK EXACTLY HERE -->
+    <div class="profile-flip">
+        <div class="flip-card" tabindex="0">
+            <div class="flip-card-inner">
+                
+                <!-- FRONT: Your Photo -->
+                <div class="flip-card-front">
+                    <img src="{{ url_for('static', filename='images/Profile2.jpg') }}" 
+                         alt="Arnab Basak" class="profile-photo">
+                </div>
+
+                <!-- BACK: Hover Text -->
+                <div class="flip-card-back">
+                    <div class="back-content">
+                       <a href="https://www.linkedin.com/in/arnabbasak24/" 
+                            class="linkedin-flip-link" 
+                             title="Visit my LinkedIn profile">
+                             <div class="linkedin-back-content">
+        <i class="fa-brands fa-linkedin"></i>
+        <span>arnabbasak24</span>
+    </div>
+    </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- 🔥 END INSERTION -->
+    </section>
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">About Me</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <p class="about-paragraph">
+                       I’m Arnab Basak, a passionate Web Developer and B.Tech Computer Science student with a strong interest in building powerful and user-focused web applications.
+                    </p>
+                    <p class="about-paragraph">
+                       I enjoy turning ideas into functional products using technologies like Flask, Java, Python, and C. Along with web development, I have a solid foundation in Networking, DBMS, Operating Systems, and Data Structures & Algorithms, helping me approach problems with clean and efficient solutions.
+                    </p>
+                    <p class="about-paragraph">
+                        I’m always learning, improving, and exploring new technologies to grow as a developer and create impactful digital experiences.
+                    </p>
+                    <p class="about-paragraph">
+                    I have foundational experience with SAP, including system navigation, understanding basic ERP workflows, and working with common transactions and reports. I’m comfortable exploring SAP modules and learning new functionalities quickly.
+                    </p>
+                    
+                    <p class="tech-intro">Here are a few technologies I've been working with:</p>
+                    <ul class="tech-list">
+                        <li class="tech-item"><span class="bullet">▹</span>C</li>
+                        <li class="tech-item"><span class="bullet">▹</span>Python</li>
+                        <li class="tech-item"><span class="bullet">▹</span>Java</li>
+                        <li class="tech-item"><span class="bullet">▹</span>Flask</li>
+                        <li class="tech-item"><span class="bullet">▹</span>HTML & CSS</li>
+                    </ul>
+                </div>
+                
+                <div class="about-image-wrapper">
+                    <div class="about-image">
+                         
+                        <div class="image-placeholder">
+                            <img src="{{ url_for('static', filename='images/Profile_photo.jpg') }}" alt="Arnab Basak" class="profile-image">
+                            <!-- <div class="initials">JD</div> -->
+                        </div>
+                    </div>
+                    <div class="image-border"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Some Things I've Built</h2>
+                <div class="section-line"></div>
+            </div>
+
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3 class="project-title">Personal Expense Tracker</h3>
+                    <p class="project-description">
+                        A user-friendly application that allows individuals to record and track their daily expenses with ease. Users can categorize their spending, view detailed summaries, and analyze their financial habits through simple visual insights. The system helps users maintain better budget control by offering organized expense logs, category-wise tracking, and monthly overviews.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">Python</span>
+                    </div>
+                    <a href="https://github.com/ItsABasak24/Expense-Manager" class="project-github">
+            <i class="fa-brands fa-github"></i>
+        </a>
+                </div>
+
+                <div class="project-card">
+                    <h3 class="project-title">Driver Safety System</h3>
+                    <p class="project-description">
+                        A hardware-based safety system that detects alcohol levels in real time using an MQ3 sensor and automatically locks the vehicle engine when the driver is intoxicated. The system sends instant SMS alerts with live location to predefined emergency contacts such as family members or nearby authorities.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">C</span>
+                        <span class="tag">C++</span>
+                    </div>
+                    <a href="https://github.com/ItsABasak24/Driver-Safety-System" class="project-github">
+            <i class="fa-brands fa-github"></i>
+        </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Certification Section -->
+        <section id="certification" class="certification section">
+             <div class="container">
+                <div class="section-header">
+                <h2 class="section-title">
+                Certification
+             </h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="certification-content">
+
+      <div class="certification-item">
+        <h3 class="certification-title">SAP</h3>
+        <p class="certification-description">
+          Completed SAP’s ‘Learning Basic ABAP Programming’ course, building foundational skills in ABAP, SQL, OOP, and the ABAP RESTful Application Programming Model.
+        </p>
+        <a href="https://drive.google.com/file/d/1Ls2nzKNVRfTvru97LKwYA_pONMW3AhJn/view?usp=drive_link" class="cert-icon" title="View Certificate"><i class="fa-brands fa-google-drive"></i></a>
+      </div>
+    <div class="certification-item">
+        <h3 class="certification-title">Java Full Stack Developer Virtual Internship</h3>
+        <p class="certification-description">
+          Completed a 10-week Java Full Stack Developer Virtual Internship with EduSkills–AICTE, gaining hands-on experience in full-stack development tools and technologies.
+        </p>
+         <a href="https://drive.google.com/file/d/16c9XhBXlv7gz5eNYbb2EsxK7KitBPmqS/view?usp=drive_link" class="cert-icon" title="View Certificate"><i class="fa-brands fa-google-drive"></i></a>
+      </div>
+      <div class="certification-item">
+        <h3 class="certification-title">Fundamentals of Artificial Intelligence</h3>
+        <p class="certification-description">
+          Earned an Elite certification from NPTEL IIT Guwahati in ‘Fundamentals of Artificial Intelligence,’ demonstrating strong understanding of AI concepts, search techniques, and problem-solving methods.
+        </p>
+        <a href="https://drive.google.com/file/d/1icUTp_k40Wh9A3K2R6mAYyAPI6Gfs7KW/view?usp=drive_link" class="cert-icon" title="View Certificate"><i class="fa-brands fa-google-drive"></i></a>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- CONTACT Me -->
+<section id="contact">
+    <div class="contact-section">
+        <div class="contact-container">
+            <div class="contact-info">
+                <h2>Let's Connect!</h2>
+                <p>Have a project in mind or just want to chat? Feel free to reach out. I'm always open to discussing new opportunities and creative ideas.</p>
+                
+                <div class="info-item">
+                    <div class="icon">📧</div>
+                    <a href="mailto:your.email@example.com">arnabbasak24@gmail.coom</a>
+                </div>
+                
+                <div class="info-item">
+                    <div class="icon">📱</div>
+                    <a href="tel:+1234567890">9836759939</a>
+                </div>
+                
+                <div class="info-item">
+                    <div class="icon">📍</div>
+                    <span>Kolkata, West Bengal, India</span>
+                </div>
+                
+                <div class="social-links">
+                    <span> <a href="https://x.com/ABasak2004" i class="fa-brands fa-twitter action_icon"></i></a></span>
+                    <span><a href="https://www.facebook.com/doli.basak.585/" i class="fa-brands fa-facebook action_icon"></i></a></span>
+                    <span><a href="https://github.com/ItsABasak24" i class="fa-brands fa-github"></i></a></span>
+                    <span><a href="https://www.linkedin.com/in/arnabbasak24/" i class="fa-brands fa-linkedin action_icon"></i></a></span>
+                </div>
+            </div>
+            
+            <div id="getintouch" class="contact-form">
+                <h3>Send Me a Message</h3>
+                <form action="/submit" method="POST">
+                    <div class="form-group">
+                        <label for="name">Full Name *</label>
+                        <input type="text" id="name" name="name" required placeholder="Enter your full name">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" required placeholder="enter your email address">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subject">Subject *</label>
+                        <input type="text" id="subject" name="subject" required placeholder="Project Inquiry">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Your Message *</label>
+                        <textarea id="message" name="message" required placeholder="Tell me about your project..."></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="footer-container">
+
+        <div class="footer-about">
+            <h3>Arnab Basak</h3>
+            <p>
+                Passionate Web Developer & Computer Science student building clean, modern, and responsive digital experiences.
+            </p>
+        </div>
+
+        <div class="footer-links">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#certification">Certification</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-social">
+            <h4>Follow Me</h4>
+            <div class="footer-icons">
+                <a href="https://x.com/ABasak2004"><i class="fa-brands fa-twitter"></i></a>
+                <a href="https://www.facebook.com/doli.basak.585/"><i class="fa-brands fa-facebook"></i></a>
+                <a href="https://github.com/ItsABasak24"><i class="fa-brands fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/arnabbasak24/"><i class="fa-brands fa-linkedin"></i></a>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <p>© 2025 Arnab Basak — All Rights Reserved.</p>
+    </div>
+</footer>
+<script>
+    const header = document.querySelector('.sticky-header');
+
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 20) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    });
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
