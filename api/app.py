@@ -5,9 +5,10 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from flask import Flask, render_template, request, redirect, url_for, flash, session
-import normal  # normal expects MONGO_URI / DB_NAME from env
-import temp
+from . import normal  # normal expects MONGO_URI / DB_NAME from env
+from . import temp
 app = Flask(__name__)
+
 temp.admin_credentials()
 app.secret_key = os.getenv("SECRET_KEY", "dev-secret")  # ensure SECRET_KEY exists in .env
 
