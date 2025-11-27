@@ -1,48 +1,50 @@
-# normal.py
+# api/normal.py
 import os
 from urllib.parse import quote_plus
-from dotenv import load_dotenv
 from pymongo import MongoClient
-from pymongo.server_api import ServerApi
 import certifi
 
-# Load environment variables
-load_dotenv()
+# Only load .env for local dev (Vercel uses env vars)
+if os.getenv("VERCEL") is None:
+    try:
+        from dotenv import load_dotenv
+        load_dotenv()
+    except Exception:
+        pass
 
-# --- Read required values from .env ---
-user = os.getenv("MONGO_USER")
-password = os.getenv("MONGO_PASS")
-host = os.getenv("MONGO_HOST")
-dbname = os.getenv("DB_NAME")
+# Prefer a single environment variable MONGO_URI (easier for Vercel)
+MONGO_URI = os.getenv("MONGO_URI")
+if not MONGO_URI:
+    user = os.getenv("MONGO_USER")
+    password = os.getenv("MONGO_PASS")
+    host = os.getenv("MONGO_HOST")
+    dbname = os.getenv("DB_NAME")
 
-# Ensure all variables exist
-if not (user and password and host and dbname):
-    raise RuntimeError(
-        "Missing environment variables. Please set MONGO_USER, MONGO_PASS, MONGO_HOST, DB_NAME in .env"
-    )
+    if not (user and password and host and dbname):
+        # Do not raise at import: that would crash app import on some environments.
+        # Instead set placeholders so app can handle missing config gracefully.
+        client = None
+        db = None
+        my_information = None
+    else:
+        user_enc = quote_plus(user)
+        pass_enc = quote_plus(password)
+        MONGO_URI = f"mongodb+srv://{user_enc}:{pass_enc}@{host}/{dbname}?retryWrites=true&w=majority"
+        client = MongoClient(MONGO_URI, tlsCAFile=certifi.where(), serverSelectionTimeoutMS=5000)
+        db = client[dbname]
+        my_information = db.get_collection("My information")  # choose a simple name (no spaces)
+else:
+    # If MONGO_URI provided, use it
+    try:
+        client = MongoClient(MONGO_URI, tlsCAFile=certifi.where(), serverSelectionTimeoutMS=5000)
+        dbname = os.getenv("DB_NAME")
+        db = client[dbname] if dbname else client.get_default_database()
+        my_information = db.get_collection("My information")
+    except Exception:
+        client = None
+        db = None
+        my_information = None
 
-# --- URL encode username & password ---
-user_enc = quote_plus(user)
-pass_enc = quote_plus(password)
-
-# --- Build the MongoDB Atlas URI (matching Atlas format) ---
-MONGO_URI = (
-    f"mongodb+srv://{user_enc}:{pass_enc}@{host}/"
-    f"?retryWrites=true&w=majority&appName=Cluster0"
-)
-
-# --- Connect to MongoDB with Server API ---
-client = MongoClient(
-    MONGO_URI,
-    server_api=ServerApi('1'),
-    tlsCAFile=certifi.where()
-)
-
-# --- Select database and collection ---
-db = client[dbname]
-my_information = db["My information"]
-
-# --- Helper: Convert ObjectId to string for templates ---
 def fix_doc_ids(doc):
     if not doc:
         return doc
@@ -51,6 +53,7 @@ def fix_doc_ids(doc):
         newdoc["_id"] = str(newdoc["_id"])
     return newdoc
 
-# --- Ping function for connection testing ---
 def ping():
+    if client is None:
+        raise RuntimeError("Mongo client not configured")
     return client.admin.command("ping")

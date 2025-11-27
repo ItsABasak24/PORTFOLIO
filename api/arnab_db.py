@@ -1,3 +1,31 @@
-from . import normal
-information = normal.my_infromation.find_one()
-print(information)
+# api/arnab_db.py
+"""
+Small utility to inspect the MongoDB collection from the normal module.
+
+Usage:
+  - To run manually from project root:
+      python -m api.arnab_db
+  - This module will NOT run its DB code when imported by other modules.
+"""
+
+try:
+    # prefer relative import when used as a package (api.*)
+    from . import normal
+except Exception:
+    # fallback to absolute import (if you run this file differently)
+    import normal
+
+def show_one_document():
+    """Fetch one document from the collection and print a cleaned version."""
+    try:
+        doc = normal.my_information.find_one()
+        if not doc:
+            print("No documents found in the collection.")
+            return
+        print("One document from DB:")
+        print(normal.fix_doc_ids(doc))
+    except Exception as e:
+        print("Error reading from DB:", e)
+
+if __name__ == "__main__":
+    show_one_document()
