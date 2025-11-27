@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback Submitted</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='submit.css') }}">
+</head>
+<body>
+
+    <!-- 🔥 Background video just like index.html -->
+    <div class="video-background">
+        <video autoplay muted loop playsinline id="bg-video">
+            <source src="{{ url_for('static', filename='videos/Background_video1.mp4') }}" type="video/mp4">
+        </video>
+        <div class="video-overlay"></div>
+    </div>
+
+    <!-- 🔥 Glass card -->
+    <div class="container">
+        <h1>Thank you — feedback submitted successfully</h1>
+
+        <p>Your name: <span class="value">{{ username }}</span></p>
+        <p>Your email: <span class="value">{{ email }}</span></p>
+
+        <form action="/" method="get">
+            <button type="submit" class="home-btn">Go back</button>
+        </form>
+    </div>
+
+</body>
+</html>

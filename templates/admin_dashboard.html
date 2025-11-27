@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin.css') }}">
+</head>
+<body>
+
+ <!-- Background video -->
+<div class="video-background">
+    <video autoplay muted loop playsinline id="bg-video">
+        <source src="{{ url_for('static', filename='videos/Background_video1.mp4') }}" type="video/mp4">
+    </video>
+    <div class="video-overlay"></div>
+</div>
+
+
+  <main class="page-wrapper">
+    <div class="dashboard glass-card">
+        <div class="dashboard-header">
+            <h1>Submitted Messages</h1>
+            <div class="header-actions">
+                <a class="btn" href="{{ url_for('home') }}">Go to Website</a>
+                <a class="btn logout" href="{{ url_for('admin_logout') }}">Logout</a>
+            </div>
+        </div>
+
+        {% if submissions %}
+        <div class="table-wrap">
+          <table class="sub-table">
+              <thead>
+                  <tr>
+                      <th>#</th>
+                      <th>Name</th>
+                      <th>Email</th>
+                      <th>Subject</th>
+                      <th>Message</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  {% for item in submissions %}
+                  <tr>
+                      <td>{{ loop.index }}</td>
+                      <td>{{ item.name }}</td>
+                      <td>{{ item.email }}</td>
+                      <td>{{ item.subject }}</td>
+                      <td class="message-cell">{{ item.message }}</td>
+                  </tr>
+                  {% endfor %}
+              </tbody>
+          </table>
+        </div>
+        {% else %}
+        <p class="no-data">No submissions found.</p>
+        {% endif %}
+    </div>
+  </main>
+
+</body>
+</html>
