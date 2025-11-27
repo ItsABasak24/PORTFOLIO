@@ -105,6 +105,18 @@ def admin():
 
     return render_template("admin_dashboard.html", submissions=submissions)
 
+@app.route("/debug_session")
+def debug_session():
+    # WARNING: remove after debugging
+    return {"session": dict(session)}, 200
+
+@app.route("/debug_db")
+def debug_db():
+    try:
+        cnt = normal.my_information.count_documents({})
+        return {"db": os.getenv("DB_NAME"), "count": cnt}, 200
+    except Exception as e:
+        return {"error": str(e)}, 500
 
 if __name__ == "__main__":
     app.run(debug=True)
