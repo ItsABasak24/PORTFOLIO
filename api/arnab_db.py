@@ -10,20 +10,20 @@ Usage:
 
 try:
     # prefer relative import when used as a package (api.*)
-    from . import normal
+    from . import temp
 except Exception:
     # fallback to absolute import (if you run this file differently)
-    import normal
+    import api.temp_arnab as temp_arnab
 
 def show_one_document():
     """Fetch one document from the collection and print a cleaned version."""
     try:
-        doc = normal.my_information.find_one()
+        doc = temp.my_information.find_one()
         if not doc:
             print("No documents found in the collection.")
             return
         print("One document from DB:")
-        print(normal.fix_doc_ids(doc))
+        print(temp.fix_doc_ids(doc))
     except Exception as e:
         print("Error reading from DB:", e)
 

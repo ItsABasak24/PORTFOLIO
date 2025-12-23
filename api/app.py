@@ -5,7 +5,7 @@ load_dotenv()
 import traceback
 
 from flask import Flask, render_template, request, redirect, url_for, flash, session
-from . import normal  # normal expects MONGO_URI / DB_NAME from env
+  # normal expects MONGO_URI / DB_NAME from env
 from . import temp
 app = Flask(__name__)
 
@@ -42,8 +42,7 @@ def submit():
 
     try:
         # Debug: log conn info (do NOT log password)
-        print("[VERCEL LOG] submit: DB_NAME=", os.getenv("DB_NAME"), " MONGO_HOST=", os.getenv("MONGO_HOST"))
-        res = normal.my_information.insert_one(doc)
+        res = temp.my_information.insert_one(doc)
         inserted_id = str(res.inserted_id)
         print("[VERCEL LOG] Inserted document id:", inserted_id)
     except Exception as e:
@@ -98,8 +97,8 @@ def admin():
 
     submissions = []
     try:
-        for d in normal.my_information.find().sort("_id", -1):
-            submissions.append(normal.fix_doc_ids(d))
+        for d in temp.my_information.find().sort("_id", -1):
+            submissions.append(temp.fix_doc_ids(d))
     except Exception as e:
         print("DB read error:", e)
         flash("Unable to fetch submissions from the database.", "error")
@@ -112,7 +111,7 @@ def admin():
 @app.route("/debug_db")
 def debug_db():
     try:
-        cnt = normal.my_information.count_documents({})
+        cnt = temp.my_information.count_documents({})
         return {"db": os.getenv("DB_NAME"), "count": cnt}, 200
     except Exception as e:
         return {"error": str(e)}, 500
